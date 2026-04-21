@@ -38,9 +38,9 @@ export function TimelineStepCard({
 }) {
   const registry = getStepRegistryEntry(step)
   const Icon = registry.icon
-  const hasActionRequired = Boolean(step.metadata.actionRequired)
+  const isInProgress = /progress/i.test(step.status)
   const [isExpanded, setIsExpanded] = useState(
-    isCurrentStage || isRecentlyAdded || hasActionRequired
+    Boolean(isRecentlyAdded) || isInProgress
   )
   const visibleFieldCount = registry.fields.filter(
     (field) => step.metadata[field.key]
