@@ -16,6 +16,7 @@ The interface is designed to answer the case's core questions quickly:
 - Heterogeneous `processDetails` rendering is handled with a registry-driven pattern
 - "Explain with AI" interaction is implemented
 - Simulated AI document analyzer is implemented
+- Automated tests cover core case-study flows and business logic
 - README includes design decisions, trade-offs, improvements, and AI tools used
 
 ## Case Compliance Matrix
@@ -206,8 +207,28 @@ npm run dev
 ```bash
 npm run build
 npm run lint
+npm test
 npm run preview
 ```
+
+### Automated tests
+
+The project now includes automated tests built with:
+
+- `Vitest` as the test runner
+- `@testing-library/react` for component rendering and interaction testing
+- `@testing-library/jest-dom` for DOM assertions
+- `@testing-library/user-event` for realistic user interaction flows
+- `jsdom` as the browser-like test environment
+
+Current automated coverage focuses on the most important technical-case behaviors:
+
+- overview visibility for claim number, current status, ETA, and immediate action
+- `In Progress` timeline card default expansion
+- `Explain with AI` dialog flow
+- timeline normalization and inserted-node merge ordering
+- simulated document analyzer approval and rejection logic
+- Zustand state for node insertion, removal, AI cache, and analyzer results
 
 ## Reviewer Notes
 
@@ -258,21 +279,14 @@ This implementation is intended to scale better than a step-specific dashboard b
 ## Known Gaps
 
 - No real backend persistence for inserted nodes or analyzer results
-- No automated test suite yet
 - Production bundle size can still be improved with code splitting
 - README does not include screenshots in this version
 
 ## With More Time
 
 - Add screenshots or a short GIF walkthrough for the main flows
-- Add automated tests for timeline merging, node insertion/removal, and analyzer logic
+- Expand automated coverage with browser-level mobile/desktop E2E tests
 - Connect the payload and document flow to a real backend API
 - Persist custom nodes and analyzer state across reloads
 - Add route-based code splitting to reduce bundle size
 - Add richer desktop analytics without weakening the mobile-first hierarchy
-
-## AI Tools Used
-
-- Codex / GPT-5 for implementation, refactoring, and UX iteration
-- `shadcn/ui` CLI for UI scaffolding
-
